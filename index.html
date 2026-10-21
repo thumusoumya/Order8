@@ -1,1 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Order #002 · Special Delivery For My Bestie</title>
+<style>
+:root{--bg:#fff4ec;--bg2:#ffe3d6;--ink:#3a1d2e;--mut:#8a6577;--card:#ffffffcc;--acc:#e0527a;--gold:#c58b2b;--line:#e8c9bd;--ok:#2f9e6b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b0f2e;--bg2:#321545;--ink:#fff3ea;--mut:#c9afc4;--card:#ffffff14;--acc:#ff7a9e;--gold:#f2c46d;--line:#5a3a6e;--ok:#5fd39b}}
+:root[data-theme="dark"]{--bg:#1b0f2e;--bg2:#321545;--ink:#fff3ea;--mut:#c9afc4;--card:#ffffff14;--acc:#ff7a9e;--gold:#f2c46d;--line:#5a3a6e;--ok:#5fd39b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(160deg,var(--bg),var(--bg2)) fixed;color:var(--ink);font:16px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+h1,h2{font-family:Georgia,"Times New Roman",serif;margin:.2em 0;line-height:1.15}
+.sc{display:none;min-height:100vh;padding:60px 20px 90px;max-width:480px;margin:0 auto;animation:in .7s both}
+.sc.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.c{text-align:center}.mut{color:var(--mut)}.tag{letter-spacing:.2em;font-size:12px;color:var(--gold);font-weight:700}
+.btn{display:block;width:100%;margin:22px 0 0;padding:15px;border:0;border-radius:16px;background:var(--acc);color:#fff;font-weight:700;font-size:17px;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px #0003}
+.btn:active{transform:scale(.98)}
+.btn.hide{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;backdrop-filter:blur(6px)}
+.bell{font-size:64px;display:inline-block;animation:r 1s infinite}
+@keyframes r{0%,100%{transform:rotate(0)}20%{transform:rotate(14deg)}40%{transform:rotate(-14deg)}60%{transform:rotate(8deg)}}
 
+/* tracking */
+.road{position:relative;height:46px;margin:18px 0 6px;border-radius:30px;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.road .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#e0527a33,#e0527a66);transition:width 1.4s ease}
+.road .bike{position:absolute;top:6px;left:0;font-size:28px;transition:left 1.4s ease;transform:scaleX(-1)}
+.road .home{position:absolute;right:10px;top:6px;font-size:26px}
+.tr{margin:22px 0 0 14px;position:relative}
+.tr:before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:4px;background:var(--line);border-radius:4px}
+.st{display:flex;gap:16px;align-items:center;margin:0 0 34px;position:relative;opacity:.45;transition:.6s}
+.st.d{opacity:1}
+.dot{width:34px;height:34px;border-radius:50%;background:var(--line);display:grid;place-items:center;color:#fff;font-weight:900;flex:none;transition:.6s}
+.st.d .dot{background:var(--acc);box-shadow:0 0 0 6px #e0527a33}
+.st b{display:block}.st small{color:var(--mut)}
+
+/* scratch */
+.sw{position:relative;margin-top:20px;border-radius:22px;overflow:hidden}
+.sw .msg{padding:26px 20px;background:var(--card);border:1px solid var(--line);border-radius:22px;min-height:260px}
+.sw canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;border-radius:22px;transition:opacity .8s;cursor:grab}
+
+/* story */
+.tl{position:relative;margin:10px 0 0;padding-left:22px;border-left:3px solid var(--line)}
+.tl .it{margin:0 0 30px;position:relative;animation:in .8s both}
+.tl .it:before{content:"";position:absolute;left:-31px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--acc)}
+.tl img{width:100%;border-radius:18px;display:block;box-shadow:0 10px 26px #0004;margin-top:8px;max-height:70vh;object-fit:cover}
+.tl p{margin:6px 2px 0}
+
+/* memory game */
+#mg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.mc{aspect-ratio:3/4;perspective:600px;cursor:pointer;border:0;padding:0;background:none}
+.mc .in{position:relative;display:block;width:100%;height:100%;transition:.5s;transform-style:preserve-3d}
+.mc.f .in{transform:rotateY(180deg)}
+.mc .bk,.mc .fr{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.mc .bk{background:linear-gradient(135deg,var(--acc),var(--gold));display:grid;place-items:center;font-size:24px;color:#fff}
+.mc .fr{transform:rotateY(180deg);background-size:cover;background-position:center 25%;border:2px solid var(--gold)}
+.mc.ok .in{box-shadow:0 0 0 3px var(--ok);border-radius:12px}
+
+/* quiz */
+.opt{display:block;width:100%;margin:10px 0;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;font-size:16px;font-family:inherit;text-align:left;cursor:pointer}
+.opt.good{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.bad{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.qmsg{min-height:1.6em;font-weight:700;color:var(--acc);text-align:center;margin-top:8px}
+
+/* hold meter */
+.ring{width:190px;height:190px;border-radius:50%;margin:24px auto;display:grid;place-items:center;font:900 40px Georgia,serif;background:conic-gradient(var(--acc) var(--p,0%),var(--line) 0)}
+.ring span{width:158px;height:158px;border-radius:50%;background:var(--bg);display:grid;place-items:center}
+.hold{touch-action:none;user-select:none;-webkit-user-select:none}
+
+/* envelopes */
+.env{margin:12px 0;cursor:pointer;display:block;width:100%;text-align:left;color:var(--ink);font:inherit}
+.env .h{font-weight:700;display:flex;justify-content:space-between}
+.env .b{max-height:0;overflow:hidden;transition:.5s;color:var(--mut)}
+.env.o .b{max-height:260px;margin-top:10px}
+
+/* coupons */
+.cp{display:flex;align-items:center;gap:12px;margin:12px 0;border:2px dashed var(--gold);border-radius:16px;padding:14px;background:var(--card);cursor:pointer;position:relative;width:100%;text-align:left;color:var(--ink);font:inherit}
+.cp .e{font-size:28px}
+.cp.u{opacity:.5}
+.cp.u:after{content:"REDEEMED";position:absolute;right:12px;top:50%;transform:translateY(-50%) rotate(-10deg);border:2px solid var(--acc);color:var(--acc);padding:2px 8px;border-radius:8px;font-weight:900;font-size:13px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:9;opacity:0;transition:opacity .4s;max-width:90vw;text-align:center}
+.toast.on{opacity:1}
+
+/* yes / no */
+.re{position:relative;height:140px;margin-top:10px}
+.re .btn{position:absolute;width:46%;margin:0;top:40px}
+#yes{left:0}#no{right:0;transition:left .25s,top .25s,right .25s;background:var(--mut)}
+
+/* receipt */
+.rc{font-family:"Courier New",monospace;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px;margin-top:18px}
+.rc div{display:flex;justify-content:space-between;gap:10px;margin:6px 0}
+.rc hr{border:0;border-top:2px dashed var(--line);margin:10px 0}
+
+/* final */
+.ly{min-height:3.6em;font-family:Georgia,serif;font-size:20px;font-style:italic;margin:18px 0;transition:opacity .6s}
+.stars{font-size:38px;letter-spacing:6px;cursor:pointer;user-select:none}
+.stars span{opacity:.3;transition:.3s}.stars span.on{opacity:1}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.gal img{width:100%;aspect-ratio:1;object-fit:cover;object-position:center 25%;border-radius:14px;box-shadow:0 8px 20px #0003}
+
+#mus{position:fixed;right:14px;top:calc(12px + env(safe-area-inset-top,0px));z-index:5;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 12px;font-size:14px;cursor:pointer;backdrop-filter:blur(8px)}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:4;width:100%;height:100%}
+#err{position:fixed;left:10px;right:10px;bottom:10px;z-index:99;padding:10px;border-radius:10px;background:#3a1220;color:#ffd7df;font:13px Arial}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<button id="mus" hidden aria-label="Music on or off">♪ Music</button>
+<canvas id="cf"></canvas>
+<div class="toast" id="toast"></div>
+
+<!-- 0. NEW ORDER -->
+<section class="sc on c" id="s0">
+  <div style="height:10vh"></div>
+  <div class="bell">🔔</div>
+  <div class="tag">NEW ORDER RECEIVED</div>
+  <h1 style="font-size:38px" id="t0"></h1>
+  <p class="mut" id="t0b"></p>
+  <div class="card" style="margin-top:20px">Tip: turn your volume up ♪<br><small class="mut">Best opened when you're alone and smiling</small></div>
+  <button class="btn" id="startBtn">Track my order →</button>
+</section>
+
+<!-- 1. TRACKING -->
+<section class="sc" id="s1">
+  <div class="tag c" id="t1"></div>
+  <h2 class="c" id="eta">Arriving in 3 min</h2>
+  <div class="road"><div class="fill" id="fill"></div><div class="bike" id="bike">🛵</div><div class="home">🏠</div></div>
+  <div class="tr" id="tr"></div>
+  <button class="btn hide" id="b1">Open my order 🎁</button>
+</section>
+
+<!-- 2. SCRATCH -->
+<section class="sc" id="s2">
+  <div class="tag c">SURPRISE #1</div>
+  <h2 class="c">Scratch to open</h2>
+  <p class="c mut">Use your finger like a scratch card</p>
+  <div class="sw"><div class="msg c" id="scrMsg"></div><canvas id="scr"></canvas></div>
+  <button class="btn hide" id="b2">See our story →</button>
+</section>
+
+<!-- 3. STORY -->
+<section class="sc" id="s3">
+  <div class="tag c">SURPRISE #2</div>
+  <h2 class="c">Our story, in frames</h2>
+  <div class="tl" id="tl"></div>
+  <button class="btn" id="b3">Play a game →</button>
+</section>
+
+<!-- 4. MEMORY GAME -->
+<section class="sc" id="s4">
+  <div class="tag c">SURPRISE #3</div>
+  <h2 class="c">Match our memories</h2>
+  <p class="c mut">Flip two cards. Find all 4 pairs.</p>
+  <div id="mg"></div>
+  <p class="c" id="mgMsg" style="font-weight:700;color:var(--acc);min-height:1.5em"></p>
+  <button class="btn hide" id="b4">Next →</button>
+</section>
+
+<!-- 5. QUIZ -->
+<section class="sc" id="s5">
+  <div class="tag c">SURPRISE #4</div>
+  <h2 class="c">The Bestie Exam</h2>
+  <p class="c mut" id="qNum"></p>
+  <div class="card"><b id="qText"></b><div id="qOpts"></div><div class="qmsg" id="qMsg"></div></div>
+  <button class="btn hide" id="b5">Next →</button>
+</section>
+
+<!-- 6. HOLD METER -->
+<section class="sc c" id="s6">
+  <div class="tag">SURPRISE #5</div>
+  <h2>Friendship meter</h2>
+  <p class="mut">Press and hold the button to measure our friendship</p>
+  <div class="ring" id="ring"><span id="pct">0%</span></div>
+  <button class="btn hold" id="holdBtn">Hold me 💗</button>
+  <p id="holdMsg" style="font-weight:700;color:var(--acc);min-height:3em;margin-top:16px"></p>
+  <button class="btn hide" id="b6">Next →</button>
+</section>
+
+<!-- 7. ENVELOPES -->
+<section class="sc" id="s7">
+  <div class="tag c">SURPRISE #6</div>
+  <h2 class="c">Open when…</h2>
+  <p class="c mut">Little letters for later. Open them all now if you want.</p>
+  <div id="envs"></div>
+  <button class="btn" id="b7">Next →</button>
+</section>
+
+<!-- 8. COUPONS -->
+<section class="sc" id="s8">
+  <div class="tag c">SURPRISE #7</div>
+  <h2 class="c">Bestie coupons</h2>
+  <p class="c mut">Tap a coupon to redeem it. Screenshot and send it to me!</p>
+  <div id="cps"></div>
+  <button class="btn" id="b8">Next →</button>
+</section>
+
+<!-- 9. YES / NO -->
+<section class="sc c" id="s9">
+  <div class="tag">ONE LAST QUESTION</div>
+  <h2 id="askQ"></h2>
+  <div class="re" id="re"><button class="btn" id="yes">Yes 💛</button><button class="btn" id="no">No</button></div>
+  <p id="yesMsg" style="font-weight:700;color:var(--acc);min-height:1.5em"></p>
+  <button class="btn hide" id="b9">Get my receipt →</button>
+</section>
+
+<!-- 10. RECEIPT -->
+<section class="sc" id="s10">
+  <div class="tag c">ORDER DELIVERED ✓</div>
+  <h2 class="c">Your receipt</h2>
+  <div class="rc" id="rc"></div>
+  <button class="btn" id="b10">One last thing →</button>
+</section>
+
+<!-- 11. FINAL -->
+<section class="sc c" id="s11">
+  <div class="tag">DELIVERED WITH LOVE</div>
+  <h1 style="font-size:34px" id="finalTitle"></h1>
+  <div class="gal" id="gal"></div>
+  <p class="ly" id="ly"></p>
+  <div class="card">
+    <b>Rate your delivery</b>
+    <div class="stars" id="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <small class="mut" id="rateMsg">tap the stars</small>
+  </div>
+  <button class="btn" id="again">Replay from start ↺</button>
+</section>
+
+<audio id="song" preload="auto" loop></audio>
+
+<script>
+/* =====================================================================
+   ✏️  EDIT EVERYTHING HERE
+   Keep this file in the same folder as the 4 photos and the song.
+   File names must match EXACTLY (capital letters and spaces too).
+   ===================================================================== */
+const FILM = {
+  name: "Bestie",                 // her name
+  from: "your bestie",            // how you sign
+  order: "Order #002",
+  img: ["Order8 Image1.jpeg", "Order8 Image2.jpeg", "Order8 Image3.jpeg", "Order8 Image4.jpeg"],
+  song: "Order8.mpeg",            // 3:24 song (if no sound, rename to .mp3 and change here)
+
+  track: [
+    ["Order placed", "Years of memories collected"],
+    ["Packed with love", "Wrapped in inside jokes and late-night talks"],
+    ["Out for delivery", "Riding past every place we've laughed together"],
+    ["Almost there", "Bringing back every 'remember when…'"],
+    ["Arriving at your heart", "Please be home 💛"]
+  ],
+
+  scratch: ["To my favourite human 💛",
+            "No birthday. No festival. No reason at all.",
+            "Just a reminder that you're the person I call first, laugh with the loudest, and trust with everything.",
+            "— Love, your bestie"],
+
+  story: [
+    { t: "Saree queen at the temple 🌙", l: "Temple lights, a calm smile and pure 'South melody aesthetic' vibes. 🥥🦢" },
+    { t: "Colours & attitude 🌈",         l: "Sunglasses on, dupatta flying, main-character mode fully activated." },
+    { t: "Mall days with you ☀️",          l: "Endless walking, window shopping and laughing at absolutely everything." },
+    { t: "Classy in black 🖤",             l: "Simple, graceful and effortlessly you. Never change." }
+  ],
+
+  quiz: [
+    { q: "Who is the craziest one in this friendship?", o: ["You", "Me", "Both of us, obviously"], a: 2,
+      ok: "Correct! We share one brain cell and it's on vacation." },
+    { q: "What do we do best together?", o: ["Study seriously", "Laugh at absolutely nothing", "Wake up early"], a: 1,
+      ok: "Yes! 3am laughing attacks are our talent." },
+    { q: "How long will we be besties?", o: ["A few years", "Until we get bored", "Forever and after that too"], a: 2,
+      ok: "Correct answer. No refunds, no returns." }
+  ],
+  quizWrong: ["Hmm… try again 😏", "Wrong! Do you even know us?", "Think harder, bestie 🙈"],
+
+  hold: { done: "ERROR 💥 Friendship too strong to measure.", during: ["Measuring…", "Wow, rising fast…", "Machine is getting hot 🔥"] },
+
+  envelopes: [
+    ["Open when you're sad 🌧️", "Remember: you've survived every bad day so far. And I'm one call away, always. Call me, we'll eat something unhealthy and fix it."],
+    ["Open when you miss me 🫂", "Close your eyes and think of our most stupid inside joke. See? You're smiling. I'm right there."],
+    ["Open when you can't sleep 🌙", "Text me. Even at 3am. Especially at 3am."],
+    ["Open when you're happy ☀️", "Tell me everything. Every detail. I want to celebrate with you."]
+  ],
+
+  coupons: [
+    ["🍕", "One free treat", "Food of your choice, my wallet cries"],
+    ["📞", "One 2-hour rant session", "I listen, no judging, I agree with everything"],
+    ["🎬", "One movie night", "You pick the movie, I bring the snacks"],
+    ["🤗", "One unlimited hug", "Valid forever, no expiry"]
+  ],
+
+  ask: "Will you be my bestie forever?",
+  yesMsg: "I knew it! Contract signed, no cancellations allowed 😌",
+  noTexts: ["Nice try 😂", "Wrong button!", "Not allowed!", "Error 404: No not found", "Just press Yes 🙄"],
+
+  receipt: [
+    ["Late night talks", "x ∞"], ["Inside jokes", "x 1,000+"], ["Secrets kept safe", "x all"],
+    ["Times you made me laugh", "uncountable"], ["Delivery charges", "FREE"]
+  ],
+  receiptTotal: "PRICELESS",
+
+  finalTitle: "You're my favourite person",
+  lines: [
+    "Some people come into your life for a reason,",
+    "and some just make life worth living.",
+    "Thank you for every laugh, every secret, every crazy day.",
+    "Here's to us. Today, tomorrow, always. 💛"
+  ],
+  rateMsg: "5 stars, just like you ⭐"
+};
+/* ===================================================================== */
+
+function showErr(m){ var d = document.getElementById("err"); if (!d) { d = document.createElement("div"); d.id = "err"; document.body.appendChild(d); } d.textContent = "Error: " + m; }
+window.addEventListener("error", function(e){ showErr(e.message); });
+
+const $ = s => document.querySelector(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SRC = FILM.img.map(f => encodeURI(f));
+let cur = 0;
+function go(n){ $("#s" + cur).classList.remove("on"); cur = n; $("#s" + n).classList.add("on"); window.scrollTo(0, 0); if (INIT[n]) INIT[n](); }
+function toast(t){ const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 2600); }
+
+/* ---------- confetti ---------- */
+const cf = $("#cf"), cg = cf.getContext("2d"); let P = [];
+function size(){ cf.width = innerWidth; cf.height = innerHeight; } size(); addEventListener("resize", size);
+function boom(n = 120){ const cols = ["#e0527a","#f2c46d","#ff9ebb","#7fd1ff","#9be7a8"];
+  for (let i = 0; i < n; i++) P.push({ x: innerWidth / 2, y: innerHeight * .45, vx: (Math.random() - .5) * 14, vy: -Math.random() * 14 - 4, r: Math.random() * 6, s: 6 + Math.random() * 8, c: cols[i % 5], l: 1 }); }
+(function anim(){ cg.clearRect(0, 0, cf.width, cf.height);
+  P = P.filter(p => p.l > 0); P.forEach(p => { p.vy += .35; p.x += p.vx; p.y += p.vy; p.r += .1; p.l -= .008;
+    cg.save(); cg.globalAlpha = Math.max(0, p.l); cg.translate(p.x, p.y); cg.rotate(p.r); cg.fillStyle = p.c; cg.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); cg.restore(); });
+  requestAnimationFrame(anim); })();
+
+/* ---------- music ---------- */
+const song = $("#song"); let musicOn = false;
+function startMusic(){ try { song.src = encodeURI(FILM.song); song.volume = .9; const p = song.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+  musicOn = true; $("#mus").hidden = false; }
+$("#mus").onclick = () => { musicOn = !musicOn; song.muted = !musicOn; if (musicOn && song.paused) song.play().catch(() => {}); $("#mus").textContent = musicOn ? "♪ Music" : "♪ Off"; };
+
+/* ---------- 0 ---------- */
+$("#t0").textContent = FILM.order;
+$("#t0b").innerHTML = "Something was packed with love,<br>just for you, " + esc(FILM.name) + ".";
+$("#startBtn").onclick = () => { startMusic(); go(1); };
+
+/* ---------- screen set-ups ---------- */
+const INIT = {
+  1: async () => {
+    $("#t1").textContent = FILM.order.toUpperCase() + " · ONE BESTIE, HANDLE WITH CARE";
+    $("#tr").innerHTML = FILM.track.map((s, i) => '<div class="st"><div class="dot">' + (i + 1) + '</div><div><b>' + esc(s[0]) + '</b><small>' + esc(s[1]) + '</small></div></div>').join("");
+    const steps = document.querySelectorAll(".st"), n = steps.length;
+    for (let i = 0; i < n; i++) {
+      await sleep(1500); steps[i].classList.add("d");
+      const k = (i + 1) / n; $("#fill").style.width = (k * 100) + "%"; $("#bike").style.left = "calc(" + (k * 100) + "% - " + (k * 60) + "px)";
+      const left = Math.max(0, 3 - Math.round(k * 3)); $("#eta").textContent = left ? "Arriving in " + left + " min" : "Arrived! 🎉";
+    }
+    boom(80); $("#b1").classList.remove("hide");
+  },
+  2: () => {
+    $("#scrMsg").innerHTML = "<h2>" + esc(FILM.scratch[0]) + "</h2>" + FILM.scratch.slice(1, -1).map(t => "<p>" + esc(t) + "</p>").join("") + '<p class="mut"><i>' + esc(FILM.scratch[FILM.scratch.length - 1]) + "</i></p>";
+    const cv = $("#scr"), r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1);
+    cv.style.opacity = 1; cv.width = r.width * d; cv.height = r.height * d; const g = cv.getContext("2d"); g.scale(d, d);
+    const gr = g.createLinearGradient(0, 0, r.width, r.height); ["#c9975a","#f7e2b4","#b8894d","#f2d59b"].forEach((c, i) => gr.addColorStop(i / 3, c));
+    g.fillStyle = gr; g.fillRect(0, 0, r.width, r.height);
+    g.fillStyle = "#6b4a1f"; g.font = "700 22px Georgia"; g.textAlign = "center"; g.fillText("Scratch here ✨", r.width / 2, r.height / 2);
+    g.globalCompositeOperation = "destination-out"; g.lineCap = g.lineJoin = "round"; g.lineWidth = 44;
+    let down = false, last = null, done = false;
+    const pt = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+    cv.onpointerdown = e => { down = true; last = pt(e); try { cv.setPointerCapture(e.pointerId); } catch (_) {} };
+    cv.onpointermove = e => { if (!down) return; const p = pt(e); g.beginPath(); g.moveTo(...last); g.lineTo(...p); g.stroke(); last = p; };
+    cv.onpointerup = cv.onpointercancel = () => { down = false; if (done) return;
+      const px = g.getImageData(0, 0, cv.width, cv.height).data; let c = 0, n = 0;
+      for (let i = 3; i < px.length; i += 64) { n++; if (px[i] === 0) c++; }
+      if (c / n > .5) { done = true; cv.style.opacity = 0; setTimeout(() => cv.style.display = "none", 800); boom(); $("#b2").classList.remove("hide"); } };
+  },
+  3: () => {
+    $("#tl").innerHTML = FILM.story.map((s, i) => '<div class="it" style="animation-delay:' + (i * .25) + 's"><b>' + esc(s.t) + '</b><img alt="" src="' + SRC[i] + '" onerror="this.style.display=\'none\'"><p>' + esc(s.l) + '</p></div>').join("");
+  },
+  4: () => {
+    const deck = [0, 1, 2, 3, 0, 1, 2, 3].sort(() => Math.random() - .5);
+    $("#mg").innerHTML = deck.map(k => '<button class="mc" data-k="' + k + '"><span class="in"><span class="bk">♡</span><span class="fr" style="background-image:url(\'' + SRC[k] + '\')"></span></span></button>').join("");
+    let open = [], found = 0, lock = false;
+    document.querySelectorAll(".mc").forEach(c => c.onclick = async () => {
+      if (lock || c.classList.contains("f")) return;
+      c.classList.add("f"); open.push(c);
+      if (open.length < 2) return;
+      lock = true; const [a, b] = open; open = [];
+      if (a.dataset.k === b.dataset.k) { a.classList.add("ok"); b.classList.add("ok"); found++; lock = false;
+        if (found === 4) { $("#mgMsg").textContent = "All memories matched! 🎉"; boom(); $("#b4").classList.remove("hide"); } }
+      else { await sleep(800); a.classList.remove("f"); b.classList.remove("f"); lock = false; }
+    });
+  },
+  5: () => {
+    let qi = 0, w = 0;
+    function ask(){
+      const Q = FILM.quiz[qi]; $("#qNum").textContent = "Question " + (qi + 1) + " of " + FILM.quiz.length; $("#qText").textContent = Q.q; $("#qMsg").textContent = "";
+      $("#qOpts").innerHTML = Q.o.map((o, i) => '<button class="opt" data-i="' + i + '">' + esc(o) + '</button>').join("");
+      document.querySelectorAll(".opt").forEach(b => b.onclick = async () => {
+        if (+b.dataset.i !== Q.a) { b.classList.remove("bad"); void b.offsetWidth; b.classList.add("bad"); $("#qMsg").textContent = FILM.quizWrong[w++ % FILM.quizWrong.length]; return; }
+        b.classList.add("good"); $("#qMsg").textContent = Q.ok; document.querySelectorAll(".opt").forEach(x => x.onclick = null);
+        await sleep(1800); qi++;
+        if (qi < FILM.quiz.length) ask(); else { $("#qMsg").textContent = "100% — certified bestie 🏆"; boom(); $("#b5").classList.remove("hide"); }
+      });
+    }
+    ask();
+  },
+  6: () => {
+    const btn = $("#holdBtn"); let p = 0, holding = false, done = false, last = performance.now();
+    const on = e => { e.preventDefault(); holding = true; }, off = () => holding = false;
+    btn.onpointerdown = on; btn.onpointerup = btn.onpointerleave = btn.onpointercancel = off; btn.oncontextmenu = e => e.preventDefault();
+    (function tick(now){
+      const dt = now - last; last = now;
+      if (!done) { p = Math.max(0, Math.min(1, p + (holding ? dt / 3500 : -dt / 2500)));
+        $("#ring").style.setProperty("--p", (p * 100) + "%"); $("#pct").textContent = Math.round(p * 100) + "%";
+        $("#holdMsg").textContent = p > 0 ? FILM.hold.during[Math.min(2, Math.floor(p * 3))] : "";
+        if (p >= 1) { done = true; $("#pct").textContent = "∞"; $("#holdMsg").textContent = FILM.hold.done; boom(160); btn.classList.add("hide"); $("#b6").classList.remove("hide"); return; } }
+      requestAnimationFrame(tick);
+    })(last);
+  },
+  7: () => {
+    $("#envs").innerHTML = FILM.envelopes.map(e => '<button class="card env"><div class="h"><span>✉️ ' + esc(e[0]) + '</span><span>▾</span></div><div class="b">' + esc(e[1]) + '</div></button>').join("");
+    document.querySelectorAll(".env").forEach(e => e.onclick = () => e.classList.toggle("o"));
+  },
+  8: () => {
+    $("#cps").innerHTML = FILM.coupons.map(c => '<button class="cp"><span class="e">' + c[0] + '</span><span><b>' + esc(c[1]) + '</b><br><small class="mut">' + esc(c[2]) + '</small></span></button>').join("");
+    document.querySelectorAll(".cp").forEach(c => c.onclick = () => { if (c.classList.contains("u")) return; c.classList.add("u"); boom(40); toast("Redeemed! Screenshot this and send it to me 📸"); });
+  },
+  9: () => {
+    $("#askQ").textContent = FILM.ask; const no = $("#no"), re = $("#re"); let k = 0;
+    const run = e => { if (e) e.preventDefault(); const r = re.getBoundingClientRect();
+      no.style.right = "auto"; no.style.left = Math.random() * (r.width - no.offsetWidth) + "px"; no.style.top = Math.random() * (r.height - no.offsetHeight) + "px";
+      no.textContent = FILM.noTexts[k++ % FILM.noTexts.length]; };
+    no.onpointerenter = run; no.onpointerdown = run; no.onclick = run;
+    $("#yes").onclick = () => { $("#yesMsg").textContent = FILM.yesMsg; boom(200); no.style.display = "none"; $("#b9").classList.remove("hide"); };
+  },
+  10: () => {
+    const d = new Date();
+    $("#rc").innerHTML = '<div><b>' + esc(FILM.order) + '</b><span>' + d.toLocaleDateString("en-IN") + '</span></div><div><span>Customer:</span><b>' + esc(FILM.name) + '</b></div><hr>' +
+      FILM.receipt.map(r => '<div><span>' + esc(r[0]) + '</span><span>' + esc(r[1]) + '</span></div>').join("") +
+      '<hr><div><b>TOTAL</b><b>' + esc(FILM.receiptTotal) + '</b></div><div><span>Paid with</span><span>love 💛</span></div><hr><div style="justify-content:center">Thank you for being my bestie!</div>';
+  },
+  11: async () => {
+    $("#finalTitle").textContent = FILM.finalTitle + ", " + FILM.name + " 💛";
+    $("#gal").innerHTML = SRC.map(s => '<img alt="" src="' + s + '" onerror="this.style.display=\'none\'">').join("");
+    boom(180);
+    document.querySelectorAll("#stars span").forEach((s, i, all) => s.onclick = () => { all.forEach((x, j) => x.classList.toggle("on", j <= i)); $("#rateMsg").textContent = FILM.rateMsg; boom(60); });
+    const ly = $("#ly");
+    for (const t of FILM.lines) { if (cur !== 11) return; ly.style.opacity = 0; await sleep(600); ly.textContent = t; ly.style.opacity = 1; await sleep(3600); }
+    ly.textContent = "— " + FILM.from;
+  }
+};
+
+/* ---------- buttons ---------- */
+$("#b1").onclick = () => go(2);
+$("#b2").onclick = () => go(3);
+$("#b3").onclick = () => go(4);
+$("#b4").onclick = () => go(5);
+$("#b5").onclick = () => go(6);
+$("#b6").onclick = () => go(7);
+$("#b7").onclick = () => go(8);
+$("#b8").onclick = () => go(9);
+$("#b9").onclick = () => go(10);
+$("#b10").onclick = () => go(11);
+$("#again").onclick = () => { location.reload(); };
+</script>
+</body>
+</html>
