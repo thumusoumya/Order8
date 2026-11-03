@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Order #002 · Special Delivery For My Bestie</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%99%A5%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <style>
 :root{--bg:#fff4ec;--bg2:#ffe3d6;--ink:#3a1d2e;--mut:#8a6577;--card:#ffffffcc;--acc:#e0527a;--gold:#c58b2b;--line:#e8c9bd;--ok:#2f9e6b}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b0f2e;--bg2:#321545;--ink:#fff3ea;--mut:#c9afc4;--card:#ffffff14;--acc:#ff7a9e;--gold:#f2c46d;--line:#5a3a6e;--ok:#5fd39b}}
@@ -230,13 +231,15 @@ h1,h2{font-family:Georgia,"Times New Roman",serif;margin:.2em 0;line-height:1.15
 
 <audio id="song" preload="auto" loop></audio>
 
+<script src="crypto.js"></script>
 <script>
 /* =====================================================================
    ✏️  EDIT EVERYTHING HERE
-   Keep this file in the same folder as the 4 photos and the song.
+   Keep this file in the same folder as crypto.js, the enc/ folder and the song.
    File names must match EXACTLY (capital letters and spaces too).
    ===================================================================== */
 const FILM = {
+  password: "YOUR_PASSWORD_HERE",  // must match the password the enc/*.bin files were encrypted with
   name: "Bestie",                 // her name
   from: "your bestie",            // how you sign
   order: "Order #002",
@@ -316,7 +319,20 @@ window.addEventListener("error", function(e){ showErr(e.message); });
 const $ = s => document.querySelector(s);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const SRC = FILM.img.map(f => encodeURI(f));
+
+/* photos: decrypted from enc/*.bin into blob: URLs */
+const SRC = [];
+let imgsReady = Promise.resolve();
+const encPath = f => "enc/" + f.replace(/\.jpe?g$/i, ".bin");   // "Order8 Image1.jpeg" -> "enc/Order8 Image1.bin"
+function loadImages(){
+  return Promise.all(FILM.img.map(async (f, i) => {
+    try {
+      const buf = await decryptFile(FILM.password, encodeURI(encPath(f)));
+      SRC[i] = URL.createObjectURL(new Blob([buf], { type: "image/jpeg" }));
+    } catch (e) { SRC[i] = ""; showErr("Could not load " + f); }
+  }));
+}
+
 let cur = 0;
 function go(n){ $("#s" + cur).classList.remove("on"); cur = n; $("#s" + n).classList.add("on"); window.scrollTo(0, 0); if (INIT[n]) INIT[n](); }
 function toast(t){ const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 2600); }
@@ -340,7 +356,7 @@ $("#mus").onclick = () => { musicOn = !musicOn; song.muted = !musicOn; if (music
 /* ---------- 0 ---------- */
 $("#t0").textContent = FILM.order;
 $("#t0b").innerHTML = "Something was packed with love,<br>just for you, " + esc(FILM.name) + ".";
-$("#startBtn").onclick = () => { startMusic(); go(1); };
+$("#startBtn").onclick = () => { startMusic(); imgsReady = loadImages(); go(1); };   // decrypt while the tracking animation plays
 
 /* ---------- screen set-ups ---------- */
 const INIT = {
@@ -353,6 +369,7 @@ const INIT = {
       const k = (i + 1) / n; $("#fill").style.width = (k * 100) + "%"; $("#bike").style.left = "calc(" + (k * 100) + "% - " + (k * 60) + "px)";
       const left = Math.max(0, 3 - Math.round(k * 3)); $("#eta").textContent = left ? "Arriving in " + left + " min" : "Arrived! 🎉";
     }
+    await imgsReady;   // make sure the photos are decrypted before the order can be opened
     boom(80); $("#b1").classList.remove("hide");
   },
   2: () => {
